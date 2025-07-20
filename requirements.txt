@@ -1,0 +1,6 @@
+llama-stack
+llama-stack-client
+termcolor
+requests
+# tavily-python  # Optional: For web search tool integration
+faiss-cpu  # For local vector DB (RAG)

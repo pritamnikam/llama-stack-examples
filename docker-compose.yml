@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  llama-stack:
+    build: .
+    environment:
+      - INFERENCE_MODEL=llama3.2:1b
+    ports:
+      - "8321:8321"
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - .:/app
+volumes:
+  ollama_data:
