@@ -2,5 +2,8 @@ llama-stack
 llama-stack-client
 termcolor
 requests
-# tavily-python  # Optional: For web search tool integration
-faiss-cpu  # For local vector DB (RAG)
+faiss-cpu
+gradio
+pydantic
+# Optional: tavily-python for web search
+# Optional: wolframalpha for math tool integration

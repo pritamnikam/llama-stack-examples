@@ -31,6 +31,27 @@ def test_script_output_contains(script, expected):
 
 # More specific output assertions for streaming and error cases
 @pytest.mark.parametrize("script,expected", [
+    ("19-llama-stack-two-agent-with-different-providers.py", "Hosted Agent:"),
+    ("20-llama-stack-prompt-chaining-strategy.py", "Turn 1:"),
+    ("21-llama-stack-routing-specialized-agents.py", "Employee:"),
+    ("22-llama-stack-parallelization-strategy.py", "Translated Alert"),
+    ("23-llama-stack-building-chatbot.py", "You:"),
+])
+def test_script_output_new_examples(script, expected):
+    script_path = os.path.join(os.path.dirname(__file__), script)
+    result = subprocess.run([sys.executable, script_path], capture_output=True, text=True, timeout=60)
+    assert expected in result.stdout, f"Output of {script} did not contain expected text: '{expected}'\nActual output:\n{result.stdout}"
+
+# Gradio UX script: only check import/run, not output (UI)
+import importlib
+@pytest.mark.skipif(importlib.util.find_spec("gradio") is None, reason="gradio not installed")
+def test_gradio_ux_script_runs():
+    script = "24-llama-staack-chatbot-UX.py"
+    script_path = os.path.join(os.path.dirname(__file__), script)
+    result = subprocess.run([sys.executable, script_path], capture_output=True, text=True, timeout=60)
+    assert "Agent and Client initialized successfully" in result.stdout or result.returncode == 0
+
+@pytest.mark.parametrize("script,expected", [
     ("06-llama-stack-streaming-completion.py", "Streaming chat completion"),
     ("07-llama-stack-multi-turn-conversation-and-context.py", "multi-turn conversation"),
     ("10-llama-stack-tool-code-interpreter.py", "WolframAlpha"),

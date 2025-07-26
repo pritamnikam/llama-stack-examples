@@ -73,6 +73,12 @@ See the provided `Dockerfile` for a complete containerized environment, includin
 | `16-llama-stack-telemetry.py`                              | Shows telemetry logging, streaming, and querying for observability and debugging.      |
 | `17-llama-stack-evaluating-performance.py`                 | Lists scoring functions and demonstrates a basic agent evaluation loop.                |
 | `18-llama-stack-llm-as-a-judge.py`                         | Uses an LLM as a judge for factual evaluation of agent responses.                      |
+| `19-llama-stack-two-agent-with-different-providers.py`     | Runs two agents (hosted vs. local/Ollama) side-by-side and compares their outputs.      |
+| `20-llama-stack-prompt-chaining-strategy.py`               | Demonstrates prompt chaining: multi-step LLM workflows (summarize, translate, etc).     |
+| `21-llama-stack-routing-specialized-agents.py`             | Shows routing: a classifier agent dispatches queries to specialized agents.             |
+| `22-llama-stack-parallelization-strategy.py`               | Demonstrates parallelization: agents handle subtasks (e.g. translations) concurrently.  |
+| `23-llama-stack-building-chatbot.py`                       | Interactive command-line chatbot with streaming, shields, and tool use.                 |
+| `24-llama-staack-chatbot-UX.py`                            | Full-featured Gradio UI chatbot with shields, tools, streaming, and modern UX.          |
 | `requirements.txt`                                | Lists all Python dependencies required for the scripts.                                         |
 | `Dockerfile`                                      | Containerizes the project, installs Ollama and all Python dependencies.                         |
 | `.gitignore`                                      | Standard Python .gitignore for venvs, logs, etc.                                                |

@@ -39,11 +39,21 @@ RUN bash -c 'ollama serve & \
 # Set environment variable for inference model
 ENV INFERENCE_MODEL=llama3.2:1b
 
+# Document environment variables
+#   TOGETHER_API_KEY: Required for Llama Stack API access
+#   TAVILY_SEARCH_API_KEY: Optional, for web search tool
+#   WOLFRAM_ALPHA_API_KEY: Optional, for WolframAlpha tool
+
 # Copy rest of the code (if any)
 COPY . .
 
 # Expose port
 EXPOSE 8321
 
-# Start Ollama and Llama Stack server
-CMD bash -c "ollama serve & sleep 5 && uv run --with llama-stack llama stack build --template ollama --image-type venv --run"
+# Expose Gradio default port for chatbot UX
+EXPOSE 7860
+
+# Production entrypoint: run script specified by SCRIPT (default: 01-llama-stack-hello.py)
+# For Gradio UI, set SCRIPT=24-llama-staack-chatbot-UX.py
+ENV SCRIPT=01-llama-stack-hello.py
+CMD bash -c "ollama serve & sleep 5 && uv run --with llama-stack llama stack build --template ollama --image-type venv --run && sh -c 'python $SCRIPT'"
